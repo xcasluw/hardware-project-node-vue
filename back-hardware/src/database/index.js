@@ -2,10 +2,11 @@ import Sequelize from "sequelize";
 import User from "../app/models/User";
 import Marca from "../app/models/Marca";
 import Motherboard from "../app/models/Motherboard";
+import Processors from "../app/models/Processors";
 
 import databaseConfig from "../config/database";
 
-const models = [User, Marca, Motherboard];
+const models = [User, Marca, Motherboard, Processors];
 
 class Database {
   constructor() {

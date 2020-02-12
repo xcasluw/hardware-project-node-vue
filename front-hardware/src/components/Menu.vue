@@ -1,8 +1,22 @@
 <template>
   <aside class="menu" v-show="isMenuVisible">
-    <router-link to="/home"> <i class="fa fa-home"></i> Dashboard </router-link>
+    <router-link to="/home">
+      <i class="fa fa-home"></i> Dashboard
+    </router-link>
     <router-link to="/motherboards">
       <i class="fa fa-cube"></i> Motherboards
+    </router-link>
+    <router-link to="/cpu">
+      <i class="fa fa-microchip"></i> Processors
+    </router-link>
+    <router-link to="/hdd">
+      <i class="fa fa-hdd-o"></i> HDD's
+    </router-link>
+    <router-link to="/ram">
+      <i class="fa fa-tasks"></i> RAM
+    </router-link>
+    <router-link to="/plower-supply">
+      <i class="fa fa-plug"></i> Power Supply
     </router-link>
   </aside>
 </template>

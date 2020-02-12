@@ -1,10 +1,6 @@
 <template>
   <div id="app" :class="{ 'hide-menu': !isMenuVisible || !user }">
-    <Header
-      title="Vue Structure"
-      :hideToggle="!user"
-      :hideUserDropdown="!user"
-    />
+    <Header title="Vue Structure" :hideToggle="!user" :hideUserDropdown="!user" />
     <Menu v-if="user" />
     <Content />
     <Footer />

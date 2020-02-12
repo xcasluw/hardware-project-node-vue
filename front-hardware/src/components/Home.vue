@@ -9,7 +9,7 @@
         </div>
         <div class="conteudo">
           <span class="item-label">Motherboard</span>
-          <span class="item-quantity">{{ countMbs ? countMbs : "???" }}</span>
+          <span class="item-quantity">{{ quantityMbs }}</span>
         </div>
       </div>
 
@@ -19,7 +19,7 @@
         </div>
         <div class="conteudo">
           <span class="item-label">CPU</span>
-          <span class="item-quantity">23</span>
+          <span class="item-quantity">{{ quantityCpus }}</span>
         </div>
       </div>
 
@@ -29,7 +29,7 @@
         </div>
         <div class="conteudo">
           <span class="item-label">HDD</span>
-          <span class="item-quantity">17</span>
+          <span class="item-quantity">{{ quantityHdds }}</span>
         </div>
       </div>
 
@@ -39,7 +39,7 @@
         </div>
         <div class="conteudo">
           <span class="item-label">RAM</span>
-          <span class="item-quantity">25</span>
+          <span class="item-quantity">{{ quantityRam }}</span>
         </div>
       </div>
 
@@ -49,7 +49,7 @@
         </div>
         <div class="conteudo">
           <span class="item-label">Power Supply</span>
-          <span class="item-quantity">19</span>
+          <span class="item-quantity">{{ quantityPs }}</span>
         </div>
       </div>
     </div>
@@ -65,7 +65,11 @@ import { baseApiUrl, showError } from "@/global";
 export default {
   data() {
     return {
-      countMbs: ""
+      quantityMbs: 0,
+      quantityCpus: 0,
+      quantityHdds: 0,
+      quantityRam: 0,
+      quantityPs: 0
     };
   },
   computed: mapState(["user"]),
@@ -75,12 +79,18 @@ export default {
       this.$store.commit("setUser", json);
     },
     async countItems() {
-      await axios
-        .get(`${baseApiUrl}/motherboards`)
-        .then(res => {
-          this.countMbs = res.data.length;
-        })
-        .catch(showError, this.countMbs);
+      axios
+        .all([
+          axios.get(`${baseApiUrl}/motherboards`),
+          axios.get(`${baseApiUrl}/processors`)
+        ])
+        .then(
+          axios.spread((...responses) => {
+            this.quantityMbs = responses[0].data.length;
+            this.quantityCpus = responses[1].data.length;
+          })
+        )
+        .catch(showError);
     }
   },
   created() {

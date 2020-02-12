@@ -3,12 +3,13 @@ import * as Yup from "yup";
 
 class MarcaController {
   async index(req, res) {
-    const { page = 1 } = req.query;
+    // const { page = 1 } = req.query;
     const marcas = await Marca.findAll({
-      limit: 20,
-      offset: (page - 1) * 20
+      // limit: 20,
+      // offset: (page - 1) * 20
+      order: [["id", "DESC"]]
     });
-    return res.json({ marcas });
+    return res.json(marcas);
   }
 
   async store(req, res) {
